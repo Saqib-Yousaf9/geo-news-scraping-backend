@@ -26,7 +26,7 @@ scheduler.init_app(app)
 nlp = spacy.load("en_core_web_sm")
 
 # MongoDB Setup
-MONGO_URI = "mongodb+srv://saqib:saqib@mernapp.ad3o26k.mongodb.net/?retryWrites=true&w=majority&appName=MERNapp"  # Or Atlas URI
+MONGO_URI = "MONGO_URI"  # Or Atlas URI
 client = MongoClient(MONGO_URI)
 db = client['nap_db']
 collection = db['nap_data']
