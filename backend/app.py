@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import spacy
 import subprocess
 from datetime import datetime
+import os
 
 try:
     nlp = spacy.load("en_core_web_sm")
