@@ -41,10 +41,11 @@ db = client['nap_db']
 collection = db['nap_data']
 
 def init_driver():
-  options = webdriver.ChromeOptions()  # Make sure this is correctly aligned
-    options.add_argument('--headless')
-    options.add_argument('--no-sandbox')
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    options = webdriver.ChromeOptions()  # Indentation should be 4 spaces from the previous line
+    options.add_argument('--headless')  # Same indentation as the previous line
+    options.add_argument('--no-sandbox')  # Same indentation
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)  # Same indentation
+
 
 def test_selenium():
     driver = init_driver()
