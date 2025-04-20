@@ -29,7 +29,7 @@ scheduler.init_app(app)
 
 
 # Load NLP
-nlp = spacy.load("en_core_web_sm")
+#nlp = spacy.load("en_core_web_sm")
 
 # MongoDB Setup
 import os
