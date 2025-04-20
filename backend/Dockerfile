@@ -34,11 +34,14 @@ ENV CHROMEDRIVER_PATH=/usr/bin/chromedriver
 WORKDIR /app
 
 # Copy requirements and install
-COPY requirements.txt .
+COPY requirements.txt . 
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy app code
 COPY . .
+
+# Expose the port that Flask will run on
+EXPOSE 5000
 
 # Start Flask app
 CMD ["python", "app.py"]
