@@ -13,13 +13,13 @@ import spacy
 import subprocess
 from datetime import datetime
 import os
-
+app = Flask(__name__)
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
     subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
     nlp = spacy.load("en_core_web_sm")
-app = Flask(__name__)
+
 CORS(app)  # Allow all origins (or customize if needed)
 
 # if __name__ == '__main__':
@@ -142,3 +142,6 @@ def visualize_nap():
     img_io.seek(0)
 
     return send_file(img_io, mimetype='image/png')
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 5000))  # Railway sets this PORT automatically
+    app.run(host="0.0.0.0", port=port)
