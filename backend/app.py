@@ -41,11 +41,9 @@ db = client['nap_db']
 collection = db['nap_data']
 
 def init_driver():
-    options.add_argument("--headless")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
-    options = webdriver.ChromeOptions()
- 
+  options = webdriver.ChromeOptions()  # Make sure this is correctly aligned
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 def test_selenium():
