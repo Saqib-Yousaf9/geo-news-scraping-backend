@@ -26,8 +26,10 @@ scheduler.init_app(app)
 nlp = spacy.load("en_core_web_sm")
 
 # MongoDB Setup
-MONGO_URI = "MONGO_URI"  # Or Atlas URI
+import os
+MONGO_URI = os.getenv("MONGO_URI")
 client = MongoClient(MONGO_URI)
+
 db = client['nap_db']
 collection = db['nap_data']
 
