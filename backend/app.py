@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
+from pyvirtualdisplay import Display
 import matplotlib.pyplot as plt
 import spacy
 import subprocess
@@ -41,14 +42,17 @@ db = client['nap_db']
 collection = db['nap_data']
 
 def init_driver():
+    display = Display(visible=0, size=(800, 600))
+    display.start()
+
     options = webdriver.ChromeOptions()
     options.add_argument('--headless')  # Run Chrome in headless mode
     options.add_argument('--no-sandbox')  # Required for running in Docker containers
     options.add_argument('--disable-dev-shm-usage')  # Prevents errors related to Docker's limited memory
     options.add_argument('--remote-debugging-port=9222')  # Allows debugging
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
-
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    
+    return driver
 def test_selenium():
     driver = init_driver()
     driver.get("https://www.geo.tv/")
