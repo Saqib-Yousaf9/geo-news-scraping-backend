@@ -48,6 +48,18 @@ options.add_argument("--disable-dev-shm-usage")
  
     return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
+def test_selenium():
+    driver = init_driver()
+    driver.get("https://www.geo.tv/")
+    print(driver.title)
+    driver.quit()
+
+@app.route('/test_selenium')
+def test_selenium_route():
+    test_selenium()
+    return "Selenium Test Passed!"
+
+
 # Scraping Job
 def scrape_nap_data():
     driver = init_driver()
