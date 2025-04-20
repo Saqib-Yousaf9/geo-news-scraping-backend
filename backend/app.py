@@ -10,8 +10,14 @@ from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
 import matplotlib.pyplot as plt
 import spacy
+import subprocess
 from datetime import datetime
 
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    nlp = spacy.load("en_core_web_sm")
 app = Flask(__name__)
 CORS(app)  # Allow all origins (or customize if needed)
 
