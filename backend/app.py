@@ -41,10 +41,12 @@ db = client['nap_db']
 collection = db['nap_data']
 
 def init_driver():
-    options = webdriver.ChromeOptions()  # Indentation should be 4 spaces from the previous line
-    options.add_argument('--headless')  # Same indentation as the previous line
-    options.add_argument('--no-sandbox')  # Same indentation
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)  # Same indentation
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # Run Chrome in headless mode
+    options.add_argument('--no-sandbox')  # Required for running in Docker containers
+    options.add_argument('--disable-dev-shm-usage')  # Prevents errors related to Docker's limited memory
+    options.add_argument('--remote-debugging-port=9222')  # Allows debugging
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 
 def test_selenium():
