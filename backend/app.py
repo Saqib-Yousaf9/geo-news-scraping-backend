@@ -42,6 +42,9 @@ client = MongoClient(MONGO_URI)
 db = client['nap_db']
 collection = db['nap_data']
 
+import shutil
+print("Chromium:", shutil.which("chromium"))
+print("Chromedriver:", shutil.which("chromedriver"))
 
 
 def init_driver():
