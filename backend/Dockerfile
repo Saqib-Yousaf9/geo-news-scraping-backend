@@ -1,23 +1,19 @@
-# Use an official Python image
-FROM python:3.10-slim
+# Use official Python base image
+FROM python:3.12-slim
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies if needed (optional)
-RUN apt-get update && apt-get install -y gcc
-
-# Copy requirements first for better caching
+# Install dependencies
 COPY requirements.txt .
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# ✅ Download the spaCy model
+# Download the spaCy language model
 RUN python -m spacy download en_core_web_sm
 
-# Copy the rest of your app
+# Copy your app code
 COPY . .
 
-# Run the app
+# Command to run your app
 CMD ["python", "app.py"]
