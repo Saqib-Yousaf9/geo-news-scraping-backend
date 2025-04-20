@@ -5,6 +5,7 @@ from pymongo import MongoClient
 import time, io
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import pandas as pd
@@ -41,18 +42,20 @@ client = MongoClient(MONGO_URI)
 db = client['nap_db']
 collection = db['nap_data']
 
-def init_driver():
-    display = Display(visible=0, size=(800, 600))
-    display.start()
 
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Run Chrome in headless mode
-    options.add_argument('--no-sandbox')  # Required for running in Docker containers
-    options.add_argument('--disable-dev-shm-usage')  # Prevents errors related to Docker's limited memory
-    options.add_argument('--remote-debugging-port=9222')  # Allows debugging
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    
+
+def init_driver():
+    # Set up Chrome options for headless mode
+    options = Options()
+    options.headless = True
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+
+    # Initialize the WebDriver with the options
+    driver = webdriver.Chrome(options=options)
+
     return driver
+
 def test_selenium():
     driver = init_driver()
     driver.get("https://www.geo.tv/")
