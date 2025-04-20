@@ -45,15 +45,14 @@ collection = db['nap_data']
 
 
 def init_driver():
-    # Set up Chrome options for headless mode
     options = Options()
-    options.headless = True
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-
-    # Initialize the WebDriver with the options
+    options.add_argument("--headless=new")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--window-size=1920,1080")
     driver = webdriver.Chrome(options=options)
-
     return driver
 
 def test_selenium():
